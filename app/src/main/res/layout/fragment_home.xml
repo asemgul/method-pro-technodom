@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="359dp"
+        android:layout_height="94dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="577dp"
+        android:background="@drawable/rounded_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/surname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/view2"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginBottom="54dp"
+        android:text="Surname"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/view2"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="197dp"
+        android:layout_marginBottom="54dp"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toEndOf="@+id/surname"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
+
+
+
+    <ImageView
+        android:id="@+id/userPhoto"
+        android:layout_width="96dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_image"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/aboniment"
+        android:layout_width="290dp"
+        android:layout_height="22dp"
+        android:layout_alignEnd="@+id/view2"
+        android:layout_alignBottom="@+id/view2"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="11dp"
+        android:text="Aboniment is available until 30.08.2019"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btn_statistics"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aboniment"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="512dp"
+        android:background="@drawable/btn_bg"
+        android:text="Статистика" />
+
+    <Button
+        android:id="@+id/btn_control_weight"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_statistics"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginBottom="510dp"
+        android:background="@drawable/btn_bg"
+        android:text="Контроль веса" />
+
+    <Button
+        android:id="@+id/btn_trains"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btn_control_weight"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="512dp"
+        android:background="@drawable/btn_bg"
+        android:text="Тренировки" />
+
+</RelativeLayout>
