@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -36,7 +37,6 @@ public class QRFragment extends Fragment {
     final int RequestCameraPermissionID = 1001;
 
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -60,27 +60,12 @@ public class QRFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_qr, container, false);
 
-        return new SampleView(this);
-
-        setContentView(R.layout.activity_main);
-
-        cameraPreview = cameraPreview.findViewById();
-        textView = (TextView) textView.findViewById();
-
-    }
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+        View view = inflater.inflate(R.layout.fragment_qr, container, false);
 //        setContentView(R.layout.activity_main);
-//
-//        cameraPreview = findViewById(R.id.cameraPreview);
-//        textView = (TextView) findViewById(R.id.textView);
+
+        cameraPreview = (SurfaceView) view.findViewById(R.id.cameraPreview);
+        textView = (TextView) view.findViewById(R.id.textView);
 
         barcodeDetector = new BarcodeDetector.Builder(getContext())
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -92,6 +77,7 @@ public class QRFragment extends Fragment {
                 .build();
 
         //addEvent
+        Log.d("errrr", "onCreate: "+cameraPreview.getHolder());
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
 
 
@@ -99,8 +85,8 @@ public class QRFragment extends Fragment {
 
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                if (ActivityCompat.checkSelfPermission(getApplicationContext(),android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity.this,
+                if (ActivityCompat.checkSelfPermission(getContext().getApplicationContext(),android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
                     return;
                 }
@@ -139,7 +125,7 @@ public class QRFragment extends Fragment {
                         @Override
                         public void run() {
                             //create vibrate
-                            Vibrator vibrator = (Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                            Vibrator vibrator = (Vibrator)getContext().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                             vibrator.vibrate(1000);
                             textView.setText(qrcodes.valueAt(0).displayValue);// возвращает это значение
                         }
@@ -149,7 +135,91 @@ public class QRFragment extends Fragment {
             }
         });
 
+
+        return view;
+
     }
+
+
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+////        setContentView(R.layout.activity_main);
+////
+////        cameraPreview = findViewById(R.id.cameraPreview);
+////        textView = (TextView) findViewById(R.id.textView);
+//
+//        barcodeDetector = new BarcodeDetector.Builder(getContext())
+//                .setBarcodeFormats(Barcode.QR_CODE)
+//                .build();
+//
+//        cameraSource = new CameraSource
+//                .Builder(getContext(), barcodeDetector)
+//                .setRequestedPreviewSize(640, 480)
+//                .build();
+//
+//        //addEvent
+//        Log.d("errrr", "onCreate: ");
+//        cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
+//
+//
+//
+//
+//            @Override
+//            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+//                if (ActivityCompat.checkSelfPermission(getContext().getApplicationContext(),android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(getActivity(),
+//                            new String[]{Manifest.permission.CAMERA}, RequestCameraPermissionID);
+//                    return;
+//                }
+//                try {
+//                    cameraSource.start(cameraPreview.getHolder());
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+//
+//            }
+//
+//            @Override
+//            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+//
+//                cameraSource.stop();
+//
+//            }
+//        });
+//
+//        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
+//            @Override
+//            public void release() {
+//
+//            }
+//
+//            @Override
+//            public void receiveDetections(Detector.Detections<Barcode> detections) {
+//                final SparseArray<Barcode> qrcodes = detections.getDetectedItems();
+//                if(qrcodes.size()!=0)
+//                {
+//                    textView.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            //create vibrate
+//                            Vibrator vibrator = (Vibrator)getContext().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+//                            vibrator.vibrate(1000);
+//                            textView.setText(qrcodes.valueAt(0).displayValue);// возвращает это значение
+//                        }
+//                    });
+//                }
+//
+//            }
+//        });
+//
+//    }
 
 
 

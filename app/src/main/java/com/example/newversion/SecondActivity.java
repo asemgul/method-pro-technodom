@@ -38,7 +38,6 @@ public class SecondActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.nav_view);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=
